@@ -11,6 +11,7 @@ def index():
 def process():
     url = request.form['url'] 
     result = main(url) 
+    return render_template('result.html', result=result)
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -9,17 +9,17 @@ from print_url import *
 os.environ['GOOGLE_API_KEY'] = "YOUR_API_KEY"
 genai.configure(api_key=os.environ['GOOGLE_API_KEY'])
       
-user_url = input("Enter a youtube URL: ")
-video_id = get_yt_vid_url(user_url)
+def main(url):
+    video_id = get_yt_vid_url(url)
 
-# Get transcript, contains time stamps 
-transcript = YouTubeTranscriptApi.get_transcript(video_id)
-summarise(transcript)
+    # Get transcript, contains time stamps 
+    transcript = YouTubeTranscriptApi.get_transcript(video_id)
+    return summarise(transcript)
 
 # Allows the user to ask a follop-up question
-question = input("Enter a follow-up question: ")
+"""question = input("Enter a follow-up question: ")
 follow_up_summary = follow_up(transcript, question)
 print(follow_up_summary)
 
 # Prints the URL which corresponds to the question the user asked
-print_url(follow_up_summary, video_id)
+print_url(follow_up_summary, video_id)"""

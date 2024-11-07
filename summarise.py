@@ -8,4 +8,4 @@ def summarise(text):
 
      # Extract summary out of response
     summary = response.candidates[0].content.parts[0].text
-    print (summary)
+    return summary
