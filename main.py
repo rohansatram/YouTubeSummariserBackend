@@ -27,4 +27,4 @@ def question(question):
     global transcript
     follow_up_summary = follow_up(transcript, question)
     link = print_url(follow_up_summary, video_id, 1)
-    return follow_up_summary, link
+    return follow_up_summary[0:-4], link

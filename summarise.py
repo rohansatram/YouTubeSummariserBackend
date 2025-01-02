@@ -3,7 +3,7 @@ import google.generativeai as genai
 
 def summarise(text):
     model = genai.GenerativeModel("gemini-1.5-flash")
-    prompt = f"You are an expert text summarizer. Summarize the following text with important details and keep the length to less than 1000 words:\n\n{text}"
+    prompt = f"You are an expert text summarizer. Summarize the following text with important details and keep the length to less than 200 words:\n\n{text}"
     response = model.generate_content(prompt)
 
      # Extract summary out of response
