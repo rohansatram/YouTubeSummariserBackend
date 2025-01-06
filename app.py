@@ -7,8 +7,6 @@ app = Flask(__name__,
     template_folder='/Users/rohansatram/code/FrontEndGit/templates',
     static_folder='/Users/rohansatram/code/FrontEndGit/static')
 
-#env = Environment(loader=FileSystemLoader('/Users/rohansatram/code/FrontEndGit/templates')) 
-
 connect = sqlite3.connect('database.db')
 connect.execute('CREATE TABLE IF NOT EXISTS CONTENT (video_id TEXT, video_title TEXT, summary TEXT)')
 
@@ -16,9 +14,13 @@ connect.execute('CREATE TABLE IF NOT EXISTS CONTENT (video_id TEXT, video_title 
 def index():
     connect = sqlite3.connect('database.db') 
     cursor = connect.cursor() 
-    cursor.execute('SELECT * FROM CONTENT') 
+    cursor.execute('SELECT video_title, summary FROM CONTENT') 
     data = cursor.fetchall()
     return render_template('index.html', data = data)
+
+@app.route('/about')
+def about():
+    return render_template('about.html')
 
 @app.route('/process', methods=['POST'])
 def process():
