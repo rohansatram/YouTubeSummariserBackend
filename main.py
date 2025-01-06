@@ -1,4 +1,6 @@
 from youtube_transcript_api import YouTubeTranscriptApi
+import requests
+from bs4 import BeautifulSoup
 import os
 from dotenv import load_dotenv
 from summarise import *
@@ -19,7 +21,12 @@ def main(url):
     global transcript 
     transcript = YouTubeTranscriptApi.get_transcript(video_id)
     link = print_url(transcript, video_id, 0)
-    return summarise(transcript), link
+    r = requests.get(f"https://www.youtube.com/watch?v={video_id}")
+    soup = BeautifulSoup(r.text, features="html.parser")
+    bs = soup.find_all(name="title")[0]
+    title = bs.text
+    video_title = title[0:-10]
+    return summarise(transcript), link, video_id, video_title
 
 def question(question):
 # Allows the user to ask a follow-up question
