@@ -4,8 +4,8 @@ import sqlite3
 from jinja2 import Environment, FileSystemLoader
 
 app = Flask(__name__, 
-    template_folder='/Users/rohansatram/code/FrontEndGit/templates',
-    static_folder='/Users/rohansatram/code/FrontEndGit/static')
+    template_folder='path/to/templates',
+    static_folder='path/to/static')
 
 connect = sqlite3.connect('database.db')
 connect.execute('CREATE TABLE IF NOT EXISTS CONTENT (video_id TEXT, video_title TEXT, summary TEXT)')
