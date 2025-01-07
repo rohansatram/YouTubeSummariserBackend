@@ -15,7 +15,7 @@ connect.execute('CREATE TABLE IF NOT EXISTS CONTENT (video_id TEXT, video_title 
 def index():
     connect = sqlite3.connect('database.db') 
     cursor = connect.cursor() 
-    cursor.execute('SELECT video_title, summary FROM CONTENT') 
+    cursor.execute('SELECT video_title, summary, video_id FROM CONTENT') 
     data = cursor.fetchall()
     return render_template('index.html', data = data)
 
@@ -52,7 +52,7 @@ def download():
         'outtmpl': os.path.join(download_dir, '%(title)s.mp4')  
     }
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-        info = ydl.extract_info(url, download=True)  # Extract video info and download
+        info = ydl.extract_info(url, download=True)
         file_path = os.path.join(download_dir, f"{info['title']}.{info['ext']}")
     return send_file(file_path, as_attachment=True)
 
