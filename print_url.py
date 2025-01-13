@@ -9,3 +9,5 @@ def print_url(summary, id, count):
     if match:
       number = match.group(1)
       return f"https://www.youtube.com/embed/{id}?start={number}"
+    else:
+       return f"https://www.youtube.com/embed/{id}"

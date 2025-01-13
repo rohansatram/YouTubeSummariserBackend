@@ -2,6 +2,7 @@ from youtube_transcript_api import YouTubeTranscriptApi
 import requests
 from bs4 import BeautifulSoup
 import os
+import re
 from dotenv import load_dotenv
 from summarise import *
 from get_video_id import *
@@ -34,4 +35,12 @@ def question(question):
     global transcript
     follow_up_summary = follow_up(transcript, question)
     link = print_url(follow_up_summary, video_id, 1)
-    return follow_up_summary[0:-4], link
+
+    follow_up_summary = follow_up_summary.strip()
+
+    if '.' in follow_up_summary:
+        last = follow_up_summary.rfind('.')
+        follow_up_summary = follow_up_summary[:last + 1]
+        return follow_up_summary, link
+
+    return follow_up_summary, link
