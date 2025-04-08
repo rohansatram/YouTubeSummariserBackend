@@ -29,15 +29,17 @@ def process():
     global video_title
     url = request.form['url'] 
     result, link, video_id, video_title = main(url)
+    bullet_points = result.replace("*", "-\n")
     with sqlite3.connect("database.db") as users:
         cursor = users.cursor()
         cursor.execute('INSERT INTO CONTENT (video_id, video_title, summary) VALUES (?,?,?)', (video_id, video_title, result))
-    return render_template('result.html', result=result, link = link)
+    return render_template('result.html', result= bullet_points, link = link)
 
 @app.route('/result', methods=['POST'])
 def result():
     text = request.form['ytfollowup']
     result, link = question(text)
+    bullet_points = [point.strip() for point in result.split('*') if point.strip()]
     return render_template('result.html', result = result, link = link)
 
 @app.route('/download')
@@ -57,4 +59,4 @@ def download():
     return send_file(file_path, as_attachment=True)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host="0.0.0.0", debug=True, port=5001)

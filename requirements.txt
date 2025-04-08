@@ -6,3 +6,4 @@ db-sqlite3
 requests
 bs4
 yt-dlp
+ffmpeg-python

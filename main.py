@@ -27,7 +27,8 @@ def main(url):
     bs = soup.find_all(name="title")[0]
     title = bs.text
     video_title = title[0:-10]
-    return summarise(transcript), link, video_id, video_title
+    text = summarise(transcript)
+    return text, link, video_id, video_title
 
 def question(question):
 # Allows the user to ask a follow-up question
